@@ -16,8 +16,14 @@ import com.squareup.picasso.Picasso;
 public class DisplayImagesActivity extends AppCompatActivity implements PresentorImpl.View {
 
     private ActivityDisplayImagesBinding layout;
-    private RecyclerView.Adapter adapter;
+    private ImagesAdapter adapter;
     private Presentor presentor;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adapter.stopPlayback();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +45,7 @@ public class DisplayImagesActivity extends AppCompatActivity implements Presento
         presentor.onActivityStarted();
     }
 
-    private RecyclerView.Adapter getAdapter() {
+    private ImagesAdapter getAdapter() {
         Picasso picasso = Application.getInstance().getApplicationComponent().picasso();
         return new ImagesAdapter(presentor, picasso);
     }

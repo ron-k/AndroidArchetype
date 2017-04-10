@@ -178,7 +178,7 @@ class VideoHolder extends BaseHolder implements View.OnClickListener {
         context.startActivity(VideoPlayerActivity.getPlayVideoIntent(context, currentPlayTime));
     }
 
-    private void stopPlayback() {
+    public void stopPlayback() {
         if (mTimeAnimator != null && mTimeAnimator.isRunning()) {
             mTimeAnimator.end();
         }

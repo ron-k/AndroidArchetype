@@ -22,6 +22,7 @@ class ImagesAdapter extends RecyclerView.Adapter<BaseHolder> {
     static final int TYPE_VIDEO = 1;
     private final Presentor presentor;
     private final Picasso picasso;
+    private VideoHolder videoHolder;
 
     @Inject
     ImagesAdapter(@NonNull Presentor presentor, @NonNull Picasso picasso) {
@@ -40,8 +41,12 @@ class ImagesAdapter extends RecyclerView.Adapter<BaseHolder> {
                 return new ImageHolder(layout, picasso);
             }
             case TYPE_VIDEO: {
-                ActivityDisplayImagesVideoItemBinding layout = ActivityDisplayImagesVideoItemBinding.inflate(inflater, parent, false);
-                return new VideoHolder(layout, context);
+                if (videoHolder == null) {
+                    ActivityDisplayImagesVideoItemBinding layout = ActivityDisplayImagesVideoItemBinding.inflate(inflater, parent, false);
+                    videoHolder = new VideoHolder(layout, context);
+
+                }
+                return videoHolder;
             }
             default:
                 throw new AssertionError();
@@ -65,4 +70,9 @@ class ImagesAdapter extends RecyclerView.Adapter<BaseHolder> {
         return presentor.getItemViewType(position);
     }
 
+    public void stopPlayback() {
+        if (videoHolder != null) {
+            videoHolder.stopPlayback();
+        }
+    }
 }
