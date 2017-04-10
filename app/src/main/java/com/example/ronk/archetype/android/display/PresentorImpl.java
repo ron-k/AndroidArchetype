@@ -18,9 +18,7 @@ import retrofit2.Response;
  */
 
 class PresentorImpl implements Presentor {
-    private static final int VIDEO_POSITION = 2111;
-    private static final int TYPE_IMAGE = 0;
-    private static final int TYPE_VIDEO = 1;
+    private static final int VIDEO_POSITION = 2;
     private final ImgurModel model;
     private final Callback<List<String>> callback;
     private final View view;
@@ -68,7 +66,7 @@ class PresentorImpl implements Presentor {
 
     @Override
     public int getItemViewType(int position) {
-        return position != VIDEO_POSITION ? TYPE_IMAGE : TYPE_VIDEO;
+        return position != VIDEO_POSITION ? ImagesAdapter.TYPE_IMAGE : ImagesAdapter.TYPE_VIDEO;
     }
 
     @Override

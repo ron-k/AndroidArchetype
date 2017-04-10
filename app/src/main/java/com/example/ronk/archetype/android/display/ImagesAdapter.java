@@ -1,11 +1,13 @@
 package com.example.ronk.archetype.android.display;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.example.ronk.archetype.android.databinding.ActivityDisplayImagesListItemBinding;
+import com.example.ronk.archetype.android.databinding.ActivityDisplayImagesImageItemBinding;
+import com.example.ronk.archetype.android.databinding.ActivityDisplayImagesVideoItemBinding;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -14,8 +16,10 @@ import javax.inject.Inject;
  * Created by ronk on 10/04/2017.
  */
 
-class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.Holder> {
+class ImagesAdapter extends RecyclerView.Adapter<BaseHolder> {
 
+    static final int TYPE_IMAGE = 0;
+    static final int TYPE_VIDEO = 1;
     private final Presentor presentor;
     private final Picasso picasso;
 
@@ -27,13 +31,26 @@ class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.Holder> {
 
 
     @Override
-    public ImagesAdapter.Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ActivityDisplayImagesListItemBinding layout = ActivityDisplayImagesListItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new Holder(layout, picasso);
+    public BaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        switch (viewType) {
+            case TYPE_IMAGE: {
+                ActivityDisplayImagesImageItemBinding layout = ActivityDisplayImagesImageItemBinding.inflate(inflater, parent, false);
+                return new ImageHolder(layout, picasso);
+            }
+            case TYPE_VIDEO: {
+                ActivityDisplayImagesVideoItemBinding layout = ActivityDisplayImagesVideoItemBinding.inflate(inflater, parent, false);
+                return new VideoHolder(layout, context);
+            }
+            default:
+                throw new AssertionError();
+
+        }
     }
 
     @Override
-    public void onBindViewHolder(ImagesAdapter.Holder holder, int position) {
+    public void onBindViewHolder(BaseHolder holder, int position) {
         DisplayedEntity e = presentor.getItemAt(position);
         holder.bind(e);
     }
@@ -48,18 +65,4 @@ class ImagesAdapter extends RecyclerView.Adapter<ImagesAdapter.Holder> {
         return presentor.getItemViewType(position);
     }
 
-    static class Holder extends RecyclerView.ViewHolder {
-        private final ActivityDisplayImagesListItemBinding layout;
-        private final Picasso picasso;
-
-        Holder(ActivityDisplayImagesListItemBinding layout, Picasso picasso) {
-            super(layout.getRoot());
-            this.layout = layout;
-            this.picasso = picasso;
-        }
-
-        void bind(DisplayedEntity e) {
-            picasso.load(e.imageUrl()).into(layout.img);
-        }
-    }
 }
