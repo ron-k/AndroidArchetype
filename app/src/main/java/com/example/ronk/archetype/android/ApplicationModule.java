@@ -2,6 +2,8 @@ package com.example.ronk.archetype.android;
 
 import android.support.annotation.NonNull;
 
+import com.squareup.picasso.Picasso;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -17,7 +19,15 @@ public class ApplicationModule {
     }
 
     @Provides
-    public Application getApplication() {
+    Application getApplication() {
         return application;
+    }
+
+    @Provides
+    Picasso picasso(Application application){
+        Picasso picasso = Picasso.with(application);
+        picasso.setLoggingEnabled(BuildConfig.DEBUG);
+        picasso.setIndicatorsEnabled(BuildConfig.DEBUG);
+        return picasso;
     }
 }

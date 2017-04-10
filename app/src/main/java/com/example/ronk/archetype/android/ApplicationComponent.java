@@ -1,5 +1,7 @@
 package com.example.ronk.archetype.android;
 
+import com.squareup.picasso.Picasso;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -12,4 +14,6 @@ import dagger.Component;
 @Singleton
 public interface ApplicationComponent {
     Application application();
+
+    Picasso picasso();
 }

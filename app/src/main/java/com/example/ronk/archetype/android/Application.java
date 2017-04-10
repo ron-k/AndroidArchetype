@@ -9,10 +9,17 @@ import android.support.annotation.NonNull;
 public class Application extends android.app.Application {
 
     private ApplicationComponent applicationComponent;
+    private static Application instance;
+
+    @NonNull
+    public static Application getInstance() {
+        return instance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
