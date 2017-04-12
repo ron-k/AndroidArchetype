@@ -42,7 +42,7 @@ public class DisplayImagesActivityTest {
                                         0)),
                         0),
                         isDisplayed()));
-        textView.check(matches(withText("Change Me")));
+        textView.check(matches(withText(R.string.app_name)));
 
     }
 
