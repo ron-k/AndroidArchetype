@@ -10,6 +10,9 @@ import com.example.ronk.archetype.android.databinding.ActivityDisplayImagesImage
 import com.example.ronk.archetype.android.databinding.ActivityDisplayImagesVideoItemBinding;
 import com.squareup.picasso.Picasso;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.inject.Inject;
 
 /**
@@ -18,15 +21,12 @@ import javax.inject.Inject;
 
 class ImagesAdapter extends RecyclerView.Adapter<BaseHolder> {
 
-    static final int TYPE_IMAGE = 0;
-    static final int TYPE_VIDEO = 1;
-    private final Presentor presentor;
     private final Picasso picasso;
     private VideoHolder videoHolder;
+    private List<DisplayedEntity> entities = Collections.emptyList();
 
     @Inject
-    ImagesAdapter(@NonNull Presentor presentor, @NonNull Picasso picasso) {
-        this.presentor = presentor;
+    ImagesAdapter(@NonNull Picasso picasso) {
         this.picasso = picasso;
     }
 
@@ -36,11 +36,11 @@ class ImagesAdapter extends RecyclerView.Adapter<BaseHolder> {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         switch (viewType) {
-            case TYPE_IMAGE: {
+            case DisplayedEntity.TYPE_IMAGE: {
                 ActivityDisplayImagesImageItemBinding layout = ActivityDisplayImagesImageItemBinding.inflate(inflater, parent, false);
                 return new ImageHolder(layout, picasso);
             }
-            case TYPE_VIDEO: {
+            case DisplayedEntity.TYPE_VIDEO: {
                 if (videoHolder == null) {
                     ActivityDisplayImagesVideoItemBinding layout = ActivityDisplayImagesVideoItemBinding.inflate(inflater, parent, false);
                     videoHolder = new VideoHolder(layout, context);
@@ -56,23 +56,32 @@ class ImagesAdapter extends RecyclerView.Adapter<BaseHolder> {
 
     @Override
     public void onBindViewHolder(BaseHolder holder, int position) {
-        DisplayedEntity e = presentor.getItemAt(position);
+        DisplayedEntity e = getItemAt(position);
         holder.bind(e);
+    }
+
+    @NonNull
+    private DisplayedEntity getItemAt(int position) {
+        return entities.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return presentor.getItemCount();
+        return entities.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return presentor.getItemViewType(position);
+        return getItemAt(position).getItemViewType();
     }
 
     public void stopPlayback() {
         if (videoHolder != null) {
             videoHolder.stopPlayback();
         }
+    }
+
+    public void setData(List<DisplayedEntity> entities) {
+        this.entities = entities;
     }
 }

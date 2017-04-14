@@ -17,4 +17,9 @@ class DisplayedEntityImage implements DisplayedEntity {
     public String imageUrl() {
         return url;
     }
+
+    @Override
+    public int getItemViewType() {
+        return TYPE_IMAGE;
+    }
 }

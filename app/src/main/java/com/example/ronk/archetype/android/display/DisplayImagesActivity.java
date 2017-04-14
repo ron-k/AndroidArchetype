@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.example.ronk.archetype.android.Application;
 import com.example.ronk.archetype.android.R;
@@ -13,7 +12,7 @@ import com.example.ronk.archetype.android.databinding.ActivityDisplayImagesBindi
 import com.example.ronk.archetype.android.imgur.ImgurModelFake;
 import com.squareup.picasso.Picasso;
 
-public class DisplayImagesActivity extends AppCompatActivity implements PresentorImpl.View {
+public class DisplayImagesActivity extends AppCompatActivity implements Presentor.View {
 
     private ActivityDisplayImagesBinding layout;
     private ImagesAdapter adapter;
@@ -45,9 +44,9 @@ public class DisplayImagesActivity extends AppCompatActivity implements Presento
         presentor.onActivityStarted();
     }
 
-    private ImagesAdapter getAdapter() {
+    private static ImagesAdapter getAdapter() {
         Picasso picasso = Application.getInstance().getApplicationComponent().picasso();
-        return new ImagesAdapter(presentor, picasso);
+        return new ImagesAdapter(picasso);
     }
 
     @NonNull
@@ -56,7 +55,8 @@ public class DisplayImagesActivity extends AppCompatActivity implements Presento
     }
 
     @Override
-    public void notifyDataChanged() {
+    public void render(ViewState viewState) {
+        adapter.setData(viewState.getEntities());
         adapter.notifyDataSetChanged();
     }
 }

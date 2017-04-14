@@ -8,5 +8,10 @@ import android.support.annotation.NonNull;
 
 public interface DisplayedEntity {
 
+    int TYPE_IMAGE = 0;
+    int TYPE_VIDEO = 1;
+
     @NonNull String imageUrl();
+
+    int getItemViewType();
 }

@@ -22,7 +22,6 @@ class PresentorImpl implements Presentor {
     private final ImgurModel model;
     private final Callback<List<String>> callback;
     private final View view;
-    private final List<String> entities = new ArrayList<>();
 
 
     @Inject
@@ -32,9 +31,7 @@ class PresentorImpl implements Presentor {
         callback = new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                entities.clear();
-                entities.addAll(response.body());
-                PresentorImpl.this.view.notifyDataChanged();
+                PresentorImpl.this.view.render(createViewState(response));
             }
 
             @Override
@@ -45,28 +42,32 @@ class PresentorImpl implements Presentor {
     }
 
     @NonNull
-    @Override
-    public DisplayedEntity getItemAt(int position) {
+    private ViewState createViewState(Response<List<String>> response) {
+        List<DisplayedEntity> displayedEntities = new ArrayList<>();
+        List<String> rawEntities = response.body();
+        int itemsCount = getItemsCount(rawEntities);
+        for (int i = 0; i < itemsCount; i++) {
+            displayedEntities.add(createEntityAt(i, rawEntities));
+        }
+        return new ViewState(displayedEntities);
+    }
+
+    private int getItemsCount(List<String> entities) {
+        int imagesCount = entities.size();
+        return imagesCount >= VIDEO_POSITION ? imagesCount + 1 : imagesCount;
+    }
+
+    @NonNull
+    private DisplayedEntity createEntityAt(int position, List<String> rawEntities) {
         if (position < VIDEO_POSITION) {
-            String url = entities.get(position);
+            String url = rawEntities.get(position);
             return new DisplayedEntityImage(url);
         } else if (position == VIDEO_POSITION) {
             return new DisplayedEntityVideo();
         } else { // position > VIDEO_POSITION
-            String url = entities.get(position - 1);
+            String url = rawEntities.get(position - 1);
             return new DisplayedEntityImage(url);
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        int realImagesCount = entities.size();
-        return realImagesCount >= VIDEO_POSITION ? realImagesCount + 1 : realImagesCount;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return position != VIDEO_POSITION ? ImagesAdapter.TYPE_IMAGE : ImagesAdapter.TYPE_VIDEO;
     }
 
     @Override
@@ -74,9 +75,5 @@ class PresentorImpl implements Presentor {
         model.getImages().enqueue(callback);
     }
 
-
-    public interface View {
-        void notifyDataChanged();
-    }
 
 }

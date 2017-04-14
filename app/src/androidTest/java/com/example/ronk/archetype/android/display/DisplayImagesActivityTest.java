@@ -33,7 +33,22 @@ public class DisplayImagesActivityTest {
     public ActivityTestRule<DisplayImagesActivity> mActivityTestRule = new ActivityTestRule<>(DisplayImagesActivity.class);
 
     @Test
-    public void displayImagesActivityTest() {
+    public void verify_content() {
+        ViewInteraction imageView = onView(
+                allOf(withId(R.id.img),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.images),
+                                        0),
+                                0),
+                        isDisplayed()));
+        imageView.check(matches(isDisplayed()));
+
+    }
+
+
+    @Test
+    public void verify_title() {
         ViewInteraction textView = onView(
                 allOf(childAtPosition(
                         allOf(withId(R.id.action_bar),

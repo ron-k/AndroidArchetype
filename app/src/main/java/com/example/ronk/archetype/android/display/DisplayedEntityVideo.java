@@ -12,4 +12,9 @@ class DisplayedEntityVideo implements DisplayedEntity {
     public String imageUrl() {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public int getItemViewType() {
+        return TYPE_VIDEO;
+    }
 }
