@@ -6,7 +6,7 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by ronk on 10/04/2017.
  */
-class ImageHolder extends BaseHolder {
+class ImageHolder extends BaseHolder<DisplayedEntityImage> {
     private final ActivityDisplayImagesImageItemBinding layout;
     private final Picasso picasso;
 
@@ -17,7 +17,7 @@ class ImageHolder extends BaseHolder {
     }
 
     @Override
-    public void bind(DisplayedEntity e) {
+    public void bind(DisplayedEntityImage e) {
         picasso.load(e.imageUrl()).into(layout.img);
     }
 }

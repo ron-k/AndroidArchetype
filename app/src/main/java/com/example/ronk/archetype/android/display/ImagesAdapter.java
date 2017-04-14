@@ -19,7 +19,7 @@ import javax.inject.Inject;
  * Created by ronk on 10/04/2017.
  */
 
-class ImagesAdapter extends RecyclerView.Adapter<BaseHolder> {
+class ImagesAdapter extends RecyclerView.Adapter<BaseHolder<? extends DisplayedEntity>> {
 
     private final Picasso picasso;
     private VideoHolder videoHolder;
@@ -32,7 +32,7 @@ class ImagesAdapter extends RecyclerView.Adapter<BaseHolder> {
 
 
     @Override
-    public BaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseHolder<? extends DisplayedEntity> onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         switch (viewType) {
@@ -55,9 +55,10 @@ class ImagesAdapter extends RecyclerView.Adapter<BaseHolder> {
     }
 
     @Override
-    public void onBindViewHolder(BaseHolder holder, int position) {
+    public void onBindViewHolder(BaseHolder<? extends DisplayedEntity> holder, int position) {
         DisplayedEntity e = getItemAt(position);
-        holder.bind(e);
+        e.pass(holder);
+//        holder.bind(e);
     }
 
     @NonNull

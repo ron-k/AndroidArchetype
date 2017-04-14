@@ -13,7 +13,6 @@ class DisplayedEntityImage implements DisplayedEntity {
     }
 
     @NonNull
-    @Override
     public String imageUrl() {
         return url;
     }
@@ -22,4 +21,10 @@ class DisplayedEntityImage implements DisplayedEntity {
     public int getItemViewType() {
         return TYPE_IMAGE;
     }
+
+    @Override
+    public <T extends BaseHolder<? extends DisplayedEntity>> void pass(T holder) {
+        ((ImageHolder) holder).bind(this);
+    }
+
 }

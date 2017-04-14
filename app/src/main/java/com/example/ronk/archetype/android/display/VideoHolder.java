@@ -25,7 +25,7 @@ import java.io.IOException;
  * Created by ronk on 10/04/2017.
  */
 
-class VideoHolder extends BaseHolder implements View.OnClickListener {
+class VideoHolder extends BaseHolder<DisplayedEntityVideo> implements View.OnClickListener {
     private static final String TAG = VideoHolder.class.getSimpleName();
     private final Context context;
     private TextureView mPlaybackView;
@@ -44,7 +44,7 @@ class VideoHolder extends BaseHolder implements View.OnClickListener {
     }
 
     @Override
-    void bind(DisplayedEntity e) {
+    void bind(DisplayedEntityVideo e) {
         attachListener();
         startPlayback();
         itemView.setOnClickListener(this);
