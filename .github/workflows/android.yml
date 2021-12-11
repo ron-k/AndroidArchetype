@@ -18,7 +18,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-        cache: gradle
+        #cache: gradle
 
     - name: Setup Gradle
       run: chmod +x gradlew && ./gradlew --version
