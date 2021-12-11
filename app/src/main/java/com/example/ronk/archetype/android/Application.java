@@ -1,6 +1,6 @@
 package com.example.ronk.archetype.android;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Created by ronk on 10/04/2017.
