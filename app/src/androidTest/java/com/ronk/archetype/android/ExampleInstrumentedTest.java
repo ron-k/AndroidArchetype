@@ -1,4 +1,4 @@
-package com.example.ronk.archetype.android;
+package com.ronk.archetype.android;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,6 +19,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.ronk.archetype.android", appContext.getPackageName());
+        assertEquals("com.ronk.archetype.android", appContext.getPackageName());
     }
 }

@@ -1,4 +1,4 @@
-package com.example.ronk.archetype.android;
+package com.ronk.archetype.android;
 
 import org.junit.Test;
 
