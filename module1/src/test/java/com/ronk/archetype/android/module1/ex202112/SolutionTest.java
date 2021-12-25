@@ -24,7 +24,7 @@ import java.util.Set;
 public class SolutionTest {
 
     private static final Random PRNG = new Random();
-    private static final int LIST_SIZE = 512;
+    private static final int LIST_SIZE = 128;
 
     private final Solution solution;
     private final Map<Integer, Set<Pair<Integer, Integer>>> targetSums;
