@@ -8,6 +8,8 @@ import static org.junit.Assert.assertNull;
 import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 
+import com.google.common.base.Stopwatch;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -19,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(Parameterized.class)
 public class SolutionTest {
@@ -28,6 +31,7 @@ public class SolutionTest {
 
     private final Solution solution;
     private final Map<Integer, Set<Pair<Integer, Integer>>> targetSums;
+    private final Scenario scenario;
     private final List<Integer> nonContainedSums;
     private final List<Integer> inList;
 
@@ -49,7 +53,8 @@ public class SolutionTest {
                     new Solution3ClassicMk1(),
                     new Solution4MultithreadedMk0(1),
                     new Solution4MultithreadedMk0(4),
-                    new Solution4MultithreadedMk1(4)
+                    new Solution4MultithreadedMk1(4),
+                    new Solution4MultithreadedMk2(4)
             )) {
                 out.add(new Scenario(listCreator, solution));
             }
@@ -71,6 +76,7 @@ public class SolutionTest {
         solution = scenario.solution;
         inList = scenario.listCreator.createInList();
         targetSums = scenario.listCreator.getPairSums(inList);
+        this.scenario = scenario;
         int NOT_FOUND_CHECKS_COUNT = targetSums.size();
         nonContainedSums = new ArrayList<>(NOT_FOUND_CHECKS_COUNT);
         int att = NOT_FOUND_CHECKS_COUNT;
@@ -90,6 +96,7 @@ public class SolutionTest {
 
     @Test
     public void testFound() {
+        Stopwatch sw = Stopwatch.createStarted();
         for (Map.Entry<Integer, Set<Pair<Integer, Integer>>> entry : targetSums.entrySet()) {
             Integer targetSum = entry.getKey();
             Pair<Integer, Integer> culprits = solution.containsSum(inList, targetSum);
@@ -97,14 +104,17 @@ public class SolutionTest {
             assertNotNull("sum " + targetSum + ": not found. expected: " + solutions, culprits);
             assertThat("sum " + targetSum + ": given solution is valid: ", solutions, hasItem(culprits));
         }
+        TestUtils.printf("testFound[%s] - %d", scenario, sw.elapsed(TimeUnit.MILLISECONDS));
     }
 
     @Test
     public void testNotFound() {
+        Stopwatch sw = Stopwatch.createStarted();
         for (Integer nonContainedSum : nonContainedSums) {
             Pair<Integer, Integer> culprits = solution.containsSum(inList, nonContainedSum);
             assertNull("sum " + nonContainedSum + " found while not expected", culprits);
         }
+        TestUtils.printf("testNotFound[%s] - %d", scenario, sw.elapsed(TimeUnit.MILLISECONDS));
 
     }
 
