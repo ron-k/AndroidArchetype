@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Solution3OptimalClassic implements Solution {
+public class Solution3ClassicMk0 implements Solution {
     @Nullable
     @Override
     public Pair<Integer, Integer> containsSum(List<Integer> in, int targetSum) {

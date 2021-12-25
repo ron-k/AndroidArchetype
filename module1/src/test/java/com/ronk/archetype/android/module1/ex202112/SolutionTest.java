@@ -38,15 +38,18 @@ public class SolutionTest {
         for (ListCreator listCreator : Arrays.asList(
                 ListCreatorEmpty.INSTANCE,
                 new ListCreatorLinear(-42, LIST_SIZE),
+                new ListCreatorLinearShuffled(new ListCreatorLinear(-42, LIST_SIZE)),
                 new ListCreatorRepeatingConstants(10, LIST_SIZE),
                 new ListCreatorRandom(LIST_SIZE)
         )) {
             for (Solution solution : Arrays.asList(
-                    new Solution1Naive(),
-                    new Solution2BinarySearch(),
-                    new Solution3OptimalClassic(),
-                    new Solution4OptimalMultithreaded(1),
-                    new Solution4OptimalMultithreaded(8)
+//                    new Solution1Naive(),
+//                    new Solution2BinarySearch(),
+                    new Solution3ClassicMk0(),
+                    new Solution3ClassicMk1(),
+                    new Solution4MultithreadedMk0(1),
+                    new Solution4MultithreadedMk0(4),
+                    new Solution4MultithreadedMk1(4)
             )) {
                 out.add(new Scenario(listCreator, solution));
             }

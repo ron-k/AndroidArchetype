@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Solution4OptimalMultithreadedTest {
+public class Solution4MultithreadedMk0Test {
 
-    private Solution4OptimalMultithreaded sol;
+    private Solution4MultithreadedMk0 sol;
 
 
     @Test
     public void createWindows_empty() {
         int threadsCount = 1;
-        sol = new Solution4OptimalMultithreaded(threadsCount);
+        sol = new Solution4MultithreadedMk0(threadsCount);
 
         List<Integer> in = ListCreatorEmpty.INSTANCE.createInList();
         List<List<Integer>> windows = sol.createWindows(in);
@@ -30,7 +30,7 @@ public class Solution4OptimalMultithreadedTest {
     @Test
     public void createWindows_1() {
         int threadsCount = 1;
-        sol = new Solution4OptimalMultithreaded(threadsCount);
+        sol = new Solution4MultithreadedMk0(threadsCount);
         List<Integer> in = new ListCreatorLinear(44, 5).createInList();
         List<List<Integer>> windows = sol.createWindows(in);
 
@@ -42,7 +42,7 @@ public class Solution4OptimalMultithreadedTest {
     @Test
     public void createWindows_threadsGtList() {
         int threadsCount = 101;
-        sol = new Solution4OptimalMultithreaded(threadsCount);
+        sol = new Solution4MultithreadedMk0(threadsCount);
         List<Integer> in = new ListCreatorLinear(44, 5).createInList();
         List<List<Integer>> windows = sol.createWindows(in);
 
@@ -59,7 +59,7 @@ public class Solution4OptimalMultithreadedTest {
     @Test
     public void createWindows_threadsLtList() {
         int threadsCount = 3;
-        sol = new Solution4OptimalMultithreaded(threadsCount);
+        sol = new Solution4MultithreadedMk0(threadsCount);
         List<Integer> in = new ListCreatorRandom(512).createInList();
         List<List<Integer>> windows = sol.createWindows(in);
 

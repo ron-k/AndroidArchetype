@@ -18,11 +18,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Solution4OptimalMultithreaded implements Solution {
+public class Solution4MultithreadedMk0 implements Solution {
     private final int threadsCount;
     private final ExecutorService executor;
 
-    public Solution4OptimalMultithreaded(int threadsCount) {
+    public Solution4MultithreadedMk0(int threadsCount) {
         this.threadsCount = threadsCount;
         executor = Executors.newFixedThreadPool(threadsCount);
 //        spinup();
@@ -114,7 +114,7 @@ public class Solution4OptimalMultithreaded implements Solution {
 
     @Override
     public String toString() {
-        return "Solution4OptimalMultithreaded{" +
+        return "Solution4MultithreadedMk0{" +
                 threadsCount +
                 '}';
     }
