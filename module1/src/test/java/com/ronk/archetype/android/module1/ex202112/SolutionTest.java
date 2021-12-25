@@ -24,7 +24,7 @@ import java.util.Set;
 public class SolutionTest {
 
     private static final Random PRNG = new Random();
-    private static final int LIST_SIZE = 128;
+    private static final int LIST_SIZE = 256;
 
     private final Solution solution;
     private final Map<Integer, Set<Pair<Integer, Integer>>> targetSums;
@@ -42,7 +42,7 @@ public class SolutionTest {
                 new ListCreatorRandom(LIST_SIZE)
         )) {
             for (Solution solution : Arrays.asList(
-//                    new Solution1Naive(),
+                    new Solution1Naive(),
                     new Solution2BinarySearch(),
                     new Solution3OptimalClassic(),
                     new Solution4OptimalMultithreaded(1),
@@ -52,6 +52,7 @@ public class SolutionTest {
             }
 
         }
+        /*
         for (Solution solution : Arrays.asList(
                 new Solution3OptimalClassic(),
                 new Solution4OptimalMultithreaded(1),
@@ -59,7 +60,7 @@ public class SolutionTest {
         )) {
             out.add(new Scenario(new ListCreatorRandom(5555), solution));
         }
-
+         */
         return out;
     }
 
