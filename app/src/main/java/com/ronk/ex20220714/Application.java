@@ -1,4 +1,4 @@
-package com.ronk.archetype.android;
+package com.ronk.ex20220714;
 
 import androidx.annotation.NonNull;
 
