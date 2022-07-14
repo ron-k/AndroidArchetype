@@ -2,11 +2,11 @@ plugins {
 	id 'com.android.application'
 }
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     defaultConfig {
         applicationId "com.ronk.archetype.android.app"
         minSdkVersion 24
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -24,7 +24,7 @@ android {
     buildFeatures {
         viewBinding true
     }
-    lintOptions {
+    lint {
         checkDependencies true
     }
 }

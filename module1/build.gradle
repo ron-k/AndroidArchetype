@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 32
 
     defaultConfig {
         minSdk 24
-        targetSdk 31
+        targetSdk 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -27,7 +27,9 @@ android {
         viewBinding true
     }
 }
-
+tasks.withType(Test) {
+    maxHeapSize = "8G"
+}
 dependencies {
     // internals / code quality
     api "com.google.code.findbugs:jsr305:3.0.2"
@@ -38,20 +40,22 @@ dependencies {
 
     //image retrieving
     implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-    implementation "com.google.code.gson:gson:2.8.7"
+    implementation "com.google.code.gson:gson:2.8.9"
 
     // UI libs
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
 
     // testing
     testImplementation "junit:junit:4.13.2"
     testImplementation "org.mockito:mockito-core:4.1.0"
+    testImplementation "com.google.guava:guava:31.0.1-jre"
+    testImplementation 'org.hamcrest:hamcrest:2.2'
 
     androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
 }
