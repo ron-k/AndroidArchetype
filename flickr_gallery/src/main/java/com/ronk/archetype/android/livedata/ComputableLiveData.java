@@ -140,7 +140,7 @@ public abstract class ComputableLiveData<T> {
     // TODO https://issuetracker.google.com/issues/112197238
     @SuppressWarnings({"WeakerAccess", "UnknownNullness"})
     @WorkerThread
-    protected abstract T compute();
+    protected abstract T compute() ;
 
 
     @CallSuper

@@ -1,8 +1,10 @@
-package com.ronk.ex20220714.flickr_gallery;
+package com.ronk.ex20220714.flickr_gallery.gallery;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.ronk.ex20220714.flickr_gallery.R;
 
 public class FlickrGalleryActivity extends AppCompatActivity {
 

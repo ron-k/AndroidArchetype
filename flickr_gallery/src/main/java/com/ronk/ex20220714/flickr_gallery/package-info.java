@@ -1,5 +1,5 @@
 @ParametersAreNonnullByDefault
-package com.ronk.archetype.android.module1;
+package com.ronk.ex20220714.flickr_gallery;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

@@ -5,7 +5,7 @@ import static com.ronk.archetype.android.TestUtils.assertCurrentActivity;
 import static com.ronk.archetype.android.TestUtils.launchApp;
 import static com.ronk.archetype.android.TestUtils.waitActivityTransition;
 
-import com.ronk.ex20220714.flickr_gallery.FlickrGalleryActivity;
+import com.ronk.ex20220714.flickr_gallery.gallery.FlickrGalleryActivity;
 
 import org.junit.Test;
 
@@ -17,9 +17,11 @@ public class SmokeTest {
     public void sanityRun() throws Exception {
         launchApp();
 
-        waitActivityTransition(); // Search Activity
+        waitActivityTransition(); // Gallery Activity
 
         assertCurrentActivity(FlickrGalleryActivity.class);
+
+        Thread.sleep(10000);
 
     /*
         onView(withId(R.id.add_widget_btn_add_widget))
@@ -46,7 +48,6 @@ public class SmokeTest {
         }));
 
 
-        waitActivityTransition(); // browser app
 
          */
     }

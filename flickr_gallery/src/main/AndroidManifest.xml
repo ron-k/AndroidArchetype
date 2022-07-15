@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ronk.ex20220714.flickr_gallery">
-
+<uses-permission android:name="android.permission.INTERNET" />
     <application>
         <activity
-            android:name=".FlickrGalleryActivity"
+            android:name=".gallery.FlickrGalleryActivity"
             android:exported="true"
             android:label="@string/flickr_gallery_activity_title">
             <intent-filter>
@@ -14,6 +14,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".single.FlickrItemActivity" />
     </application>
 
 </manifest>
