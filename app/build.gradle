@@ -33,7 +33,7 @@ dependencies {
     implementation project(":module1")
     //DI by Dagger 2
     implementation "com.google.dagger:dagger:2.40.5"
-    annotationProcessor "com.google.dagger:dagger-compiler:2.40.5"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.42"
 
     // testing
     testImplementation "junit:junit:4.13.2"
