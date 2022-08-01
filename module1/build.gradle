@@ -31,7 +31,7 @@ android {
 dependencies {
     //DI by Dagger 2
     api "com.google.dagger:dagger:2.43"
-    annotationProcessor "com.google.dagger:dagger-compiler:2.43"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.43.1"
 
     //image retrieving
     implementation 'com.squareup.picasso:picasso:2.71828'
